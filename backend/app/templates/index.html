@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Busca Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+
+<main>
+    <div class="container-fluid">
+        <div class="row bg-light mb-4">
+            <div class="col-12 text-center py-3">
+                <div class="display-4">Buscar em marketplace</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form action="" id="formSearch" method="POST">
+            <div class="row justify-content-end align-items-center">
+                <div class="form-group col-12 col-md-3 col-lg-4">
+                    <label>Site</label>
+                    {{form.site(class_="form-control")}}
+                </div>
+                <div class="form-group col-12 col-md-3 col-lg-3">
+                    <label>Categoria</label>
+                    {{form.category(class_="form-control cat-search")}}
+                </div>
+                <div class="form-inline col-md-6 col-lg-5 mt-3">
+                    {{form.query(class_="form-control", placeholder="Buscar itens") }}
+                    <input type="submit" class="btn btn-primary" value="Buscar">
+                </div>
+                {{form.searchType}}
+            </div>
+        </form>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            {% for c in products %}
+                <div class="card col-12 col-sm-4 col-lg-3 m-2" style="width: 10rem;">
+                  <img src="{{c['photo']}}" class="card-img-top img-fluid" alt="{{c['description']}}" width="50" height="60">
+                  <div class="card-body">
+                    <h5 class="card-title">{{c['description']}}</h5>
+                    {% if c['price'] %}
+                        <p class="card-text text-success">{{c['price']}}</p>
+                    {% else %}
+                        <p class="card-text text-primary">Visite o site para ver as ofertas!</p>
+                    {% endif %}
+                    {% if c['merchant'] %}
+                        <a class="btn btn-link col-12" href="{{c['merchant']['merchantLink']}}" target="_blank">{{c['merchant']['merchantName']}}</a>
+                    {% endif %}
+                    <a href="{{c['link']}}" class="btn btn-outline-primary" target="_blank">Ir para o site</a>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+<script>
+    let categorySelect = $('.cat-search');
+    let hideInput = $('#searchType')
+    let form = $('#formSearch')
+
+    $(document).ready(() => {
+        hideInput.val('query')
+    })
+
+
+    categorySelect.change(() => {
+        hideInput.val('cat')
+        if($('.cat-search').val())
+        {
+            form.submit()
+        }
+    })
+
+</script>
+
+
+</body>
+</html>
