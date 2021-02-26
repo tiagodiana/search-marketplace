@@ -1,0 +1,81 @@
+<main>
+  <div class="container-fluid">
+    <div class="row bg-light mb-4">
+      <div class="col-12 text-center py-3">
+        <div class="display-4">Buscar em marketplace</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <form #formSearch='ngForm' [class.was-validated]="validate">
+      <div class="form-row justify-content-center align-items-end">
+        <div class="col-2">
+          <label>Site</label>
+          <select class="form-control" name="site" id="site" [(ngModel)]="searchForm.site" (change)="changeSite()" required>
+            <option value="ml">Mercado Livre</option>
+            <option value="bp">Buscapé</option>
+          </select>
+        </div>
+
+        <div class="col-2">
+          <label>Categoria</label>
+          <select [disabled]="!searchForm.site" class="form-control" name="category" id="category" [(ngModel)]="searchForm.category" (change)="changeCategory()">
+            <option value="celular">Celular</option>
+            <option value="geladeira">Geladeira</option>
+            <option value="tv">Televisores</option>
+          </select>
+        </div>
+
+        <div class="col-3">
+          <input [disabled]="!searchForm.site" type="text" class="form-control" name="query" id="query" [(ngModel)]="searchForm.query" required>
+
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-primary" (click)="getQueryMarketplace()" [disabled]="clickCancel">
+            <div *ngIf="clickCancel" class="spinner-border spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            Procurar
+          </button>
+        </div>
+
+      </div>
+    </form>
+
+
+  </div>
+
+  <div class="container-fluid" *ngIf="queryRequest$ | async as products">
+    <div class="row justify-content-center align-items-center">
+
+      <div class="card col-12 col-sm-4 col-lg-3 m-2" style="width: 10rem;" *ngFor="let product of products">
+        <div class="card-header">
+          <img
+            src="{{product.photo}}"
+            class="card-img-top img-card-custom"
+            alt="{{product.description}}">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <p *ngIf="product.price" class="card-text text-success h4">{{product.price}}</p>
+
+          <p *ngIf="!product.price" class="card-text text-primary">Visite o site para ver as ofertas!</p>
+
+          <a *ngIf="product.merchant" class="btn btn-link col-12" href="{{product.merchant.merchantLink}}" target="_blank">
+            {{product.merchant.merchantName}}
+          </a>
+
+          <div class="col-12 text-center">
+            <a href="{{product.link}}" class="btn btn-outline-primary" target="_blank">Ir para o site</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+
+</main>
+
