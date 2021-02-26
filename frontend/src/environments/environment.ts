@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://0.0.0.0:5000',
+  urlApi: 'https://api-search-marketplace.herokuapp.com',
 };
 
 /*
-*  HEROKU SERVER: https://search-marketplace.herokuapp.com
+*  HEROKU SERVER: https://api-search-marketplace.herokuapp.com/
 * */
 
 /*

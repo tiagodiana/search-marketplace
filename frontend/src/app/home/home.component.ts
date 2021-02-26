@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
 
   getQueryMarketplace(): void
   {
+    this.searchForm.type = 'qry';
     this.validate = false;
     if (!this.searchForm.site)
     {

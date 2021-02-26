@@ -1,11 +1,21 @@
 from app import mysql
+import MySQLdb
 
 
 def selectResearches():
-    cur = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT * FROM researches")
     if result > 0:
         return cur.fetchall()
+    else:
+        return False
+
+
+def selectResearchesId(idresearches):
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT id, result FROM researches WHERE id="+idresearches)
+    if result > 0:
+        return cur.fetchone()
     else:
         return False
 

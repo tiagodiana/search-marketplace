@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlApi: 'https://search-marketplace.herokuapp.com',
+  urlApi: 'https://api-search-marketplace.herokuapp.com',
 };

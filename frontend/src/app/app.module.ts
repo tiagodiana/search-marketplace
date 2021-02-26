@@ -8,12 +8,16 @@ import {HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
+import { HistoryComponent } from './history/history.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoadingComponent
+    LoadingComponent,
+    HistoryComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

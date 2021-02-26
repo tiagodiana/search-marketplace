@@ -3,6 +3,7 @@
     <div class="row bg-light mb-4">
       <div class="col-12 text-center py-3">
         <div class="display-4">Buscar em marketplace</div>
+        <a href="javascript:;" routerLink="/history" class="btn btn-link">Historico de busca</a>
       </div>
     </div>
   </div>
@@ -10,7 +11,7 @@
   <div class="container-fluid">
     <form #formSearch='ngForm' [class.was-validated]="validate">
       <div class="form-row justify-content-center align-items-end">
-        <div class="col-2">
+        <div class="col-lg-2 col-12">
           <label>Site</label>
           <select class="form-control" name="site" id="site" [(ngModel)]="searchForm.site" (change)="changeSite()" required>
             <option value="ml">Mercado Livre</option>
@@ -18,7 +19,7 @@
           </select>
         </div>
 
-        <div class="col-2">
+        <div class="col-lg-2 col-12">
           <label>Categoria</label>
           <select [disabled]="!searchForm.site" class="form-control" name="category" id="category" [(ngModel)]="searchForm.category" (change)="changeCategory()">
             <option value="celular">Celular</option>
@@ -27,12 +28,12 @@
           </select>
         </div>
 
-        <div class="col-3">
+        <div class="col-lg-3 col-12 mt-lg-0 mt-4">
           <input [disabled]="!searchForm.site" type="text" class="form-control" name="query" id="query" [(ngModel)]="searchForm.query" required>
 
         </div>
-        <div class="col-2">
-          <button type="button" class="btn btn-primary" (click)="getQueryMarketplace()" [disabled]="clickCancel">
+        <div class="col-lg-2 col-12 mt-lg-0 mt-4">
+          <button type="button" class="btn btn-primary btn-block" (click)="getQueryMarketplace()" [disabled]="clickCancel">
             <div *ngIf="clickCancel" class="spinner-border spinner-border-sm" role="status">
               <span class="sr-only">Loading...</span>
             </div>
